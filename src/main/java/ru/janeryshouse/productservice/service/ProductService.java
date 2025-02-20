@@ -54,6 +54,12 @@ public class ProductService {
         return productMapper.toProductResponse(productRepository.save(entity));
     }
 
+    public void delete(String id) {
+        var entity = productRepository.findById(id).orElseThrow(
+                () -> new RuntimeException("Entity with id `%s` not found".formatted(id)));
+        productRepository.delete(entity);
+    }
+
 //    public ProductResponse update(String id, ProductRequest product) {
 //        log.info("Searching for product with id: {}", id);
 //

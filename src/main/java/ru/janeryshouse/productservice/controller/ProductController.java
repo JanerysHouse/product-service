@@ -24,7 +24,7 @@ public class ProductController {
 
     }
     @PostMapping("/addProduct")
-    public ResponseEntity<ProductResponse> addProduct(@RequestBody ProductRequest request) {
+    public ResponseEntity<ProductResponse> createProduct(@RequestBody ProductRequest request) {
         return productService.create(request)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.status(HttpStatus.BAD_REQUEST).build());
@@ -34,9 +34,14 @@ public class ProductController {
     public ResponseEntity<List<ProductResponse>> findAll() {
         return ResponseEntity.ok(productService.findAll());
     }
-    @GetMapping
+    @PutMapping("/update")
     public ResponseEntity<ProductResponse> updateProduct(@RequestBody ProductRequest request) {
         return ResponseEntity.ok(productService.update(request));
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> delete(@PathVariable String id) {
+        return ResponseEntity.ok().build();
     }
 }
 

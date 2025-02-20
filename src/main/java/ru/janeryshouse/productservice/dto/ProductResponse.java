@@ -7,5 +7,9 @@ import java.math.BigDecimal;
 /**
  * DTO for {@link Product}
  */
-public record ProductResponse(String id, String name, String description, BigDecimal price) {
+public record ProductResponse(
+        String id,
+        String name,
+        String description,
+        BigDecimal price) {
 }
