@@ -18,7 +18,7 @@ public class ProductController {
 
     private final ProductService productService;
 
-    @GetMapping("{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<Product> getOne(@PathVariable String id) {
         return ResponseEntity.ok(productService.findById(id));
 
@@ -30,7 +30,7 @@ public class ProductController {
                 .orElse(ResponseEntity.status(HttpStatus.BAD_REQUEST).build());
     }
 
-    @GetMapping
+    @GetMapping("/all")
     public ResponseEntity<List<ProductResponse>> findAll() {
         return ResponseEntity.ok(productService.findAll());
     }
@@ -39,8 +39,9 @@ public class ProductController {
         return ResponseEntity.ok(productService.update(request));
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/delete/{id}")
     public ResponseEntity<Void> delete(@PathVariable String id) {
+        productService.delete(id);
         return ResponseEntity.ok().build();
     }
 }
